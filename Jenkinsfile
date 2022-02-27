@@ -1,3 +1,4 @@
+properties([parameters([string('DOCKERTAG')]), pipelineTriggers([upstream('kubernetescode/master, ')])])
 node {
     def app
 
