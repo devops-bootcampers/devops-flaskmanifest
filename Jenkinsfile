@@ -29,5 +29,14 @@ pipeline {
       }
     }
 
+    stage('properties') {
+      steps {
+        script {
+          properties([parameters([string(defaultValue: 'latest', name: 'DOCKER_TAG')])])
+        }
+
+      }
+    }
+
   }
 }
