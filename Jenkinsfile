@@ -26,6 +26,7 @@ pipeline {
               sh "git config user.name chielvis01"
               //sh "git switch master"
               sh "cat deployment.yaml"
+              sh "sed -i 's+chielvis1/flask:*+chielvis1/flask:+g' deployment.yaml"
               sh "sed -i 's+chielvis1/flask:*+chielvis1/flask:${DOCKER_TAG}+g' deployment.yaml"
               sh "cat deployment.yaml"
               sh "git add ."
