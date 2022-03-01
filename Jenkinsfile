@@ -2,8 +2,22 @@ pipeline {
   agent any
   stages {
     stage('Cloning / Git') {
-      steps {
-        git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/flaskmanifest.git', branch: 'master', poll: true)
+      parallel {
+        stage('Cloning / Git') {
+          steps {
+            git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/flaskmanifest.git', branch: 'master', poll: true)
+          }
+        }
+
+        stage('properties') {
+          steps {
+            script {
+              properties([parameters([string('DOCKER_TAG')]), pipelineTriggers([pollSCM('* * * * *')])])
+            }
+
+          }
+        }
+
       }
     }
 
