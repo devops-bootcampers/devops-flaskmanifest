@@ -29,7 +29,7 @@ pipeline {
               sh "sed -i 's+chielvis1/flask:*+chielvis1/flask:${DOCKER_TAG}+g' deployment.yaml"
               sh "cat deployment.yaml"
               sh "git add ."
-              sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
+              sh "git commit -m 'Done by Jenkins Job flaskmanifest: ${env.BUILD_NUMBER}'"
               sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/devops-bootcampers/flaskmanifest.git HEAD:master"
             }
           }
