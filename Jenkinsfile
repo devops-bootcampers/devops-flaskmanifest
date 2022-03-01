@@ -6,7 +6,7 @@ pipeline {
         git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/flaskmanifest.git', branch: 'master', poll: true)
       }
     }
-    
+
     stage('Properties') {
       steps {
         script {
@@ -35,6 +35,12 @@ pipeline {
           }
         }
 
+      }
+    }
+
+    stage('echo tag') {
+      steps {
+        sh 'echo ${DOCKER_TAG}'
       }
     }
 
