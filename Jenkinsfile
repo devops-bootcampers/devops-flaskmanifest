@@ -10,7 +10,7 @@ pipeline {
     stage('Properties') {
       steps {
         script {
-          properties([parameters([string('DOCKER_TAG')]))
+          properties([parameters([string('DOCKER_TAG')]), pipelineTriggers([pollSCM('* * * * *')])])
         }
 
       }
