@@ -10,7 +10,7 @@ pipeline {
     stage('Properties') {
       steps {
         script {
-          properties([parameters([string(defaultValue: 'latest', name: 'DOCKER_TAG')])])
+          properties([parameters([string(name: 'DOCKER_TAG', trim: true)])])
         }
 
       }
@@ -35,12 +35,6 @@ pipeline {
           }
         }
 
-      }
-    }
-
-    stage('echo tag') {
-      steps {
-        sh 'echo ${DOCKER_TAG}'
       }
     }
 
