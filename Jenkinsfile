@@ -10,7 +10,7 @@ pipeline {
     stage('Properties') {
       steps {
         script {
-          properties([parameters([string(name: 'DOCKER_TAG', trim: true)])])
+          properties([parameters([string(defaultValue: 'latest', name: 'DOCKER_TAG')])])
         }
 
       }
