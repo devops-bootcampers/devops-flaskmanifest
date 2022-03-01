@@ -2,22 +2,8 @@ pipeline {
   agent any
   stages {
     stage('Cloning / Git') {
-      parallel {
-        stage('Cloning / Git') {
-          steps {
-            git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/flaskmanifest.git', branch: 'master', poll: true)
-          }
-        }
-
-        stage('properties') {
-          steps {
-            script {
-              properties([parameters([string('DOCKER_TAG')]), pipelineTriggers([pollSCM('* * * * *')])])
-            }
-
-          }
-        }
-
+      steps {
+        git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/flaskmanifest.git', branch: 'master', poll: true)
       }
     }
 
@@ -38,6 +24,15 @@ pipeline {
               sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/devops-bootcampers/flaskmanifest.git HEAD:master"
             }
           }
+        }
+
+      }
+    }
+
+    stage('Properties') {
+      steps {
+        script {
+          properties([parameters([string('DOCKER_TAG')]), pipelineTriggers([pollSCM('* * * * *')])])
         }
 
       }
