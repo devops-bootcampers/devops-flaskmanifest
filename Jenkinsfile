@@ -6,6 +6,15 @@ pipeline {
         git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/flaskmanifest.git', branch: 'master', poll: true)
       }
     }
+    
+    stage('Properties') {
+      steps {
+        script {
+          properties([parameters([string('DOCKER_TAG')]))
+        }
+
+      }
+    }
 
     stage('Update manifest') {
       steps {
@@ -24,15 +33,6 @@ pipeline {
               sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/devops-bootcampers/flaskmanifest.git HEAD:master"
             }
           }
-        }
-
-      }
-    }
-
-    stage('Properties') {
-      steps {
-        script {
-          properties([parameters([string('DOCKER_TAG')]), pipelineTriggers([pollSCM('* * * * *')])])
         }
 
       }
