@@ -18,7 +18,7 @@ spec:
         app: flaskdemo
     spec:
       containers:
-      - image: chielvis1/flask:1211
+      - image: chielvis1/flask:latest1211
         name: flaskdemo
         resources: {}
 status: {}
