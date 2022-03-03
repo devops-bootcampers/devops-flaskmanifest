@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Cloning / Git') {
       steps {
-        git credentialsId: 'github', url: 'https://github.com/devops-bootcampers/devops-flaskmanifest.git'
+        git(credentialsId: 'github', url: 'https://github.com/devops-bootcampers/devops-flaskmanifest.git')
       }
     }
 
@@ -16,7 +16,7 @@ pipeline {
       }
     }
 
-    stage('Update manifest') {
+    stage('Append Flask Manifest') {
       steps {
         script {
           catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -30,7 +30,7 @@ pipeline {
               sh "cat deployment.yaml"
               sh "git add ."
               sh "git commit -m 'Done by Jenkins Job flaskmanifest: ${env.BUILD_NUMBER}'"
-              sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/devops-bootcampers/flaskmanifest.git HEAD:master"
+              sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/devops-bootcampers/devops-flaskmanifest.git HEAD:master"
             }
           }
         }
