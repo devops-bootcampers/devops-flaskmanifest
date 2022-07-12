@@ -38,5 +38,11 @@ pipeline {
       }
     }
 
+    stage('Trying') {
+      steps {
+        echo 'trying'
+      }
+    }
+
   }
 }
